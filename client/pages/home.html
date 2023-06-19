@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pigeon | A chat messenger</title>
+</head>
+<body>
+    <h1>A chat client</h1>
+    <script>
+        fetch('http://app.midelightdev.localhost/logon/', {
+            method: 'post',
+            credentials: "include",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(async response => {
+            const data = await response.json();
+            if(data.user != false){
+                const continueAsEl = document.createElement("div");
+                continueAsEl.classList.add("continueAs");
+                continueAsEl.innerHTML = `<img src='http://i.midelightdev.localhost/?i=${data.user.pfp}'><a href="/app">Continue as ${data.user.username}</a>`;
+                document.body.appendChild(continueAsEl);
+            }
+        }).catch(error => {
+            console.error(error); 
+        });
+    </script>
+</body>
+</html>
