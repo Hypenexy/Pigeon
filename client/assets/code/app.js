@@ -20,6 +20,9 @@ if(logonData.user != false){
         console.log(error);
     });
 }
+else{
+    window.location.replace("../");
+}
 
 /**
  * Creates an element and appends it
@@ -40,7 +43,12 @@ document.body.appendChild(app);
 const sidepanel = createAppendElement("sidepanel", app);
 
 const profileEl = createAppendElement("profileEl", sidepanel);
-profileEl.innerHTML = `<div class='status'></div><img src='http://i.midelightdev.localhost/?i=${logonData.user.pfp}'><p>${logonData.user.username}</p>`;
+
+var pfpURL = "https://assets.midelight.net/ui/pfp.png";
+if(logonData.user.pfp){
+    pfpURL = `http://i.midelightdev.localhost/?i=${logonData.user.pfp}`;
+} 
+profileEl.innerHTML = `<div class='status'></div><img src='${pfpURL}'><p>${logonData.user.username}</p>`;
 
 const search = createAppendElement("search", sidepanel);
 search.innerHTML = "<input placeholder='Search or start conversations'>"
